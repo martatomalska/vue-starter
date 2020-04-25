@@ -8,7 +8,7 @@
       <a @click="logMeOut">Wyloguj</a>
     </div>
     <div v-else>
-      <input type="text" v-model="email">
+      <input id="email-box" type="text" v-model="email">
       <button @click="logMeIn()">Zaloguj</button>
     </div>
 
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+  import "milligram";
 
 export default {
   data() {
@@ -38,10 +39,10 @@ export default {
     },
     logMeIn() {
       this.authenticatedUsername = this.email;
-      this.email = '';
     },
     logMeOut() {
       this.authenticatedUsername = '';
+      this.email = '';  // to może być również w this.logMeIn(), nie ma znaczenia
     }
 
   }
@@ -57,4 +58,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+  #email-box {
+    width: 50%;
+  }
 </style>
