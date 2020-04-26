@@ -2,7 +2,7 @@
     <div>
         <label>Zaloguj się e-mailem</label>
         <input id="email-box" type="email" v-model="email">
-        <button @click="enter()">{{buttonLabel}}</button>
+        <button @click="enter()">{{buttonLabelToDisplay}}</button>
     </div>
 </template>
 
@@ -17,6 +17,16 @@
         methods: {
             enter() {
                 this.$emit('login', this.email);
+            }
+        },
+        // mounted() {
+        //     if (!this.buttonLabel) {
+        //         this.buttonLabel = 'Zaloguj się';
+        //     }
+        // },
+        computed: {
+            buttonLabelToDisplay() {
+                return this.buttonLabel || 'Zaloguj się';
             }
         }
     }
