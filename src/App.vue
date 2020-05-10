@@ -1,12 +1,12 @@
 <template>
   <div id="app">
 
-    <h1>Witaj w systemie zapisów na zajęcia</h1>
+    <h1>System do zapisów na zajęcia</h1>
 
     <div v-if="authenticatedUsername != ''">
       <user-panel :username="authenticatedUsername" @logout="logMeOut"></user-panel>
-<!--      <h3>Witaj {{authenticatedUsername}}</h3>-->
-<!--      <a @click="logMeOut">Wyloguj</a>-->
+      <meeting-page></meeting-page>
+
     </div>
     <div v-else>
       <login-form @login="logMeIn($event)"></login-form>
@@ -20,9 +20,10 @@
   import "milligram";
   import LoginForm from "./LoginForm";
   import UserPanel from "./UserPanel";
+  import MeetingPage from "./meetings/MeetingPage";
 
 export default {
-  components: {LoginForm, UserPanel},
+  components: {LoginForm, UserPanel, MeetingPage},
   data() {
     return {
       authenticatedUsername: ''
@@ -49,7 +50,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /*text-align: center;*/
   color: #2c3e50;
   margin-top: 60px;
 }
