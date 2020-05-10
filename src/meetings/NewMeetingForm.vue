@@ -6,7 +6,7 @@
         <label>Opis</label>
         <textarea v-model="newMeeting.description"></textarea>
         <button>Dodaj</button>
-        <span v-if="error"> Spotkanie musi mieć nazwę</span>
+        <span v-if="error" v-bind:class="{redText: error}"> Spotkanie musi mieć nazwę</span>
     </form>
 </template>
 
@@ -25,8 +25,14 @@
                 } else {
                     this.$emit('added', this.newMeeting);
                     this.newMeeting = {};
+                    this.error = false;
                 }
             }
         }
     }
 </script>
+<style>
+    .redText{
+        color: #cf0000;
+    }
+</style>
