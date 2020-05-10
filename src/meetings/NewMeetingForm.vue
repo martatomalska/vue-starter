@@ -6,6 +6,7 @@
         <label>Opis</label>
         <textarea v-model="newMeeting.description"></textarea>
         <button>Dodaj</button>
+        <span v-if="error"> Spotkanie musi mieć nazwę</span>
     </form>
 </template>
 
@@ -13,13 +14,18 @@
     export default {
         data() {
             return {
-                newMeeting: {}
+                newMeeting: {},
+                error: false,
             };
         },
         methods: {
             addNewMeeting() {
-                this.$emit('added', this.newMeeting);
-                this.newMeeting = {};
+                if (!this.newMeeting.name) {
+                    this.error = true;
+                } else {
+                    this.$emit('added', this.newMeeting);
+                    this.newMeeting = {};
+                }
             }
         }
     }
