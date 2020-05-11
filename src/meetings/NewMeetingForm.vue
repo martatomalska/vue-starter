@@ -14,7 +14,9 @@
     export default {
         data() {
             return {
-                newMeeting: {},
+                newMeeting: {
+                    participants: [],
+                },
                 error: false,
             };
         },
