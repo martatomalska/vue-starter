@@ -6,9 +6,19 @@
 </template>
 
 <script>
+    import MeetingPage from "./meetings/MeetingPage";
     export default {
+        components: {MeetingPage},
         props: ['username'],
-        name: "UserPanel"
+        name: "UserPanel",
+        methods: {
+            addNewMeeting(meeting) {
+                this.meetings.push("nowe spotkanie")
+            }
+        },
+        data () {
+            return {}
+        },
     }
 </script>
 

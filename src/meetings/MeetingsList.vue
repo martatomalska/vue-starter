@@ -12,14 +12,16 @@
             <td>{{ meeting.name }}</td>
             <td>{{ meeting.description }}</td>
             <td>
-                <ol v-if="meeting.participants.length > 0">
-                    <li v-for="(participant, index) in meeting.participants" :key="index">{{ participant }}</li>
+                <ol v-for="participant in meeting.participants">
+                    <li>{{ participant }}</li>
                 </ol>
             </td>
             <td>
-                <button v-if="meeting.participants.indexOf(user) < 1" @click="subscribe(meeting)">Zapisz się</button>
-                <button v-if="meeting.participants.indexOf(user) > 0" @click="unsubscribe(meeting)">Wypisz się</button>
-                <button v-if="meeting.participants.length < 1" class="button button-outline" @click="remove(meeting)">Usuń puste spotkanie</button>
+                <div>
+                    <button v-if="meeting.participants.indexOf(authenticatedUsername) < 0" @click="subscribe(meeting.name)">Zapisz się</button>
+                    <button v-if="meeting.participants.indexOf(authenticatedUsername) >= 0" @click="unsubscribe(meeting.name)">Wypisz się</button>
+                    <button v-if="meeting.participants.length == 0" class="button button-outline" @click="remove(meeting.name)">Usuń puste spotkanie</button>
+                </div>
             </td>
         </tr>
         </tbody>
@@ -28,17 +30,18 @@
 
 <script>
     export default {
-        props: ['meetings', 'user'],
+        props: ['meetings', 'authenticatedUsername'],
         methods: {
-            subscribe(meeting) {
-                this.$emit('subscribe', meeting);
+            subscribe(meetingName) {
+                this.$emit('subscribe', meetingName);
             },
-            unsubscribe(meeting) {
-                this.$emit('unsubscribe', meeting);
+            unsubscribe(meetingName) {
+                this.$emit('unsubscribe', meetingName);
             },
-            remove(meeting) {
-                this.$emit('remove', meeting);
-            }
+            remove(meetingName) {
+                this.$emit('remove', meetingName);
+            },
+
         }
     }
 </script>

@@ -15,6 +15,8 @@
         data() {
             return {
                 newMeeting: {
+                    name: '',
+                    description: '',
                     participants: [],
                 },
                 error: false,
@@ -25,8 +27,10 @@
                 if (!this.newMeeting.name) {
                     this.error = true;
                 } else {
-                    this.$emit('added', this.newMeeting);
-                    this.newMeeting = {};
+                    this.$emit('added', Object.assign({}, this.newMeeting));
+                    this.newMeeting.name = '';
+                    this.newMeeting.description = '';
+                    this.newMeeting.participants = [];
                     this.error = false;
                 }
             }

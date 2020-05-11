@@ -3,14 +3,13 @@
 
     <h1>System do zapisów na zajęcia</h1>
 
-    <div v-if="authenticatedUsername != ''">
+    <div v-if="authenticatedUsername !== ''">
       <user-panel :username="authenticatedUsername" @logout="logMeOut"></user-panel>
-      <meeting-page></meeting-page>
+      <meeting-page :authenticatedUsername="authenticatedUsername"></meeting-page>
 
     </div>
     <div v-else>
       <login-form @login="logMeIn($event)"></login-form>
-
     </div>
 
   </div>
