@@ -17,9 +17,9 @@
                 </ol>
             </td>
             <td>
-                <button @click="subscribe(meeting)">Zapisz się</button>
-                <button @click="unsubscribe(meeting)">Wypisz się</button>
-                <button class="button button-outline" @click="remove(meeting)">Usuń puste spotkanie</button>
+                <button v-if="meeting.participants.indexOf(user) < 1" @click="subscribe(meeting)">Zapisz się</button>
+                <button v-if="meeting.participants.indexOf(user) > 0" @click="unsubscribe(meeting)">Wypisz się</button>
+                <button v-if="meeting.participants.length < 1" class="button button-outline" @click="remove(meeting)">Usuń puste spotkanie</button>
             </td>
         </tr>
         </tbody>
@@ -28,7 +28,7 @@
 
 <script>
     export default {
-        props: ['meetings'],
+        props: ['meetings', 'user'],
         methods: {
             subscribe(meeting) {
                 this.$emit('subscribe', meeting);
